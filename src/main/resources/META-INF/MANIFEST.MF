@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Class-Path: ucanaccess-4.0.4.jar commons-logging-1.1.3.jar jna-5.0.0.j
+ ar commons-lang-2.6.jar jackcess-2.1.11.jar hsqldb-2.3.1.jar jna-plat
+ form-5.0.0.jar
+Main-Class: net.jemand771.domevlcextradip.ApplicationDip
+
