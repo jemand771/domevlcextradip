@@ -22,6 +22,8 @@ public class ApplicationDip {
     public static int sleepDelay = 10;
     public static long windowFoundLastAt = 0;
     public static int windowNotFoundTimeMax = 3000;
+    public static String configPlaying;
+    public static String configNoInfo;
 
     public static Properties prop;
     private static String driverURL = "jdbc:ucanaccess://";
@@ -79,8 +81,7 @@ public class ApplicationDip {
 //            System.out.println(blub);
                 displayShit(playing, ytCode);
             }
-        }
-        catch (SocketException e){
+        } catch (SocketException e) {
             System.out.println("YOU CLOSED THE VLC YOU BLITHERING IDIOT (telnet got disrespected)");
             System.exit(0);
         }
@@ -101,6 +102,8 @@ public class ApplicationDip {
         prop.load(input);
         dbfilePath = prop.getProperty("dbpath");
         driverURL += dbfilePath;
+        configNoInfo = prop.getProperty("displaynoinfo", "");
+        configPlaying = prop.getProperty("displayinfo");
     }
 
     public static void openConnections() throws SQLException, IOException {
@@ -144,10 +147,16 @@ public class ApplicationDip {
         Statement statement = dbConnection.createStatement();
         ResultSet rs = statement.executeQuery(sql);
         if (rs.next()) {
-            text = "NOW PLAYING: " + rs.getString(3) + " - " + rs.getString(4);
+            text = configPlaying;
+            for (int i = 0; i < 100; i++) {
+                if (text.contains("{dbc" + i + "}")) {
+                    text = text.replace("{dbc" + i + "}", rs.getString(i));
+                    text = text.replace("{ytcode}", ytCode);
+                }
+            }
 //            System.out.println(text);
         } else {
-            text = "no info found in database";
+            text = configNoInfo;
         }
         field.setText(text);
     }
