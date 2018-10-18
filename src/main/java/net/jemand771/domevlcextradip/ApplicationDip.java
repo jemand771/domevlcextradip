@@ -147,13 +147,10 @@ public class ApplicationDip {
         Statement statement = dbConnection.createStatement();
         ResultSet rs = statement.executeQuery(sql);
         if (rs.next()) {
-            text = configPlaying;
-            for (int i = 0; i < 100; i++) {
-                if (text.contains("{dbc" + i + "}")) {
-                    text = text.replace("{dbc" + i + "}", rs.getString(i));
-                    text = text.replace("{ytcode}", ytCode);
-                }
-            }
+
+            DisplayParser parser = new DisplayParser(rs, configNoInfo);
+            text = parser.parse(configPlaying);
+
 //            System.out.println(text);
         } else {
             text = configNoInfo;
