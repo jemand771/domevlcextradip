@@ -1,6 +1,5 @@
 package net.jemand771.domevlcextradip;
 
-
 import com.healthmarketscience.jackcess.Database;
 import com.healthmarketscience.jackcess.DatabaseBuilder;
 
