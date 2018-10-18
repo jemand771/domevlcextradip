@@ -32,13 +32,14 @@ public class DisplayParser {
 
             String plaintext = "";
             String command = "";
-            System.out.println(i + " " + segment + " " + Arrays.toString(commandAndLiteralString));
-            if (i != 0) {
+//            System.out.println(i + " " + segment + " " + Arrays.toString(commandAndLiteralString));
+            if (i == 0) {
+                plaintext = commandAndLiteralString[0];
+            } else {
                 command = commandAndLiteralString[0];
                 if (i != segments.length - 1)
-                    plaintext = commandAndLiteralString[1];
-            } else {
-                plaintext = commandAndLiteralString[0];
+                    if (commandAndLiteralString.length >= 2)
+                        plaintext = commandAndLiteralString[1];
             }
             output += parseCommand(command);
             output += plaintext;
