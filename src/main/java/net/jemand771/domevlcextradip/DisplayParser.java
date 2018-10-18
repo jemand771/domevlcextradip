@@ -32,7 +32,7 @@ public class DisplayParser {
 
             String plaintext = "";
             String command = "";
-            System.out.print(i + " " + segment + " " + Arrays.toString(commandAndLiteralString));
+            System.out.println(i + " " + segment + " " + Arrays.toString(commandAndLiteralString));
             if (i != 0) {
                 command = commandAndLiteralString[0];
                 if (i != segments.length - 1)
